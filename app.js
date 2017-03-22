@@ -27,7 +27,7 @@ io.sockets.on('connection', function () {
 io.on('connection', function(socket){
   socket.on('client_msg', function(msg) {
     console.log('Recieved message from client: ', msg);
-    io.emit('message', `<p>${msg}</p>`);
+    io.emit('message', msg);
   });
   console.log('a user connected');
   

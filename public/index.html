@@ -28,11 +28,11 @@
 </div>
 <form id="sendMessage" action="javascript:void(0)">
   <label for="message"> Type your message here:</label>
-  <input type="text" id="message" required autofocus>
+  <input type="text" id="message" autofocus>
   <!--<button onClick = "sendMessage()">send it!</button>-->
 </form>
 
-<button onClick ="socketTest()">test sockets</button>
+<!--<button onClick ="socketTest()">test sockets</button>-->
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
@@ -40,7 +40,7 @@
     var socket = io();
 
     socket.on('message', function(msg){
-      $('#log').append(msg);
+      $('#log').append('<p>['+localTime()+ ']: '+ msg + '</p>');
       notifyMe('response from server',msg);
     });
 
@@ -64,12 +64,21 @@
     sendMessage = function() {
       socket.emit('client_msg',$("#message").val());
       console.log("just sent: ", $("#message").val());
+      $("#message").val("");
     };
 
     $("#message").keydown(function(event){
-      if(event.keyCode == 13){ // if enter
+      if((event.keyCode == 13) && ($("#message").val() !== "")){ // if enter
         sendMessage();
     }
+
+    /** 
+    * returns local time in HH:mm:ss format
+    */
+    localTime = function() {
+      var date = new Date();
+      return [date.getHours(), date.getMinutes(), date.getSeconds()].join(':'); 
+    };
 });
     
 
