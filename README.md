@@ -11,7 +11,7 @@ Features:
 * TODO persistent logging (non persistent at first)
 * TODO allowing clients to save the log file
 * TODO allowing clients to decide whether they want desktop notifications after initial request
-* TODO time stamps based on the client time zone
+* DONE time stamps based on the client time zone
 * TODO add code testing for practice
 
 ## Usage:
