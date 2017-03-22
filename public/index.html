@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Welcome to Wayback Chat</title>
+  <link rel="stylesheet" href="/styles/style.css">
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script> --> <!-- integrate socket io client side for notification --> 
+  <script src="scripts/client.js"></script> <!-- everything is public is root -->
+  <!--<script src="scripts/sockets.js"></script> --> <!-- everything is public is root -->
+  
+</head>
+<body>
+<h1>Welcome to Wayback Chat</h1>
+
+<h2>
+  <span>Connection status:</span>
+  <span id="status"></span>
+</h2>
+
+
+<div id="log">
+  <h3>
+    your chat history is here
+  </h3>
+  <!-- history gets recorded here -->
+</div>
+<form id="sendMessage" action="javascript:void(0)">
+  <label for="message"> Type your message here:</label>
+  <input type="text" id="message" required autofocus>
+  <!--<button onClick = "sendMessage()">send it!</button>-->
+</form>
+
+<button onClick ="socketTest()">test sockets</button>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+  $(function() {
+    var socket = io();
+
+    socket.on('message', function(msg){
+      $('#log').append(msg);
+      notifyMe('response from server',msg);
+    });
+
+    socket.on('connect', function() {
+      $("#status").text("Connected");
+      console.log("Connected");
+
+    });
+
+    socket.on('disconnect', function() {
+      $("#status").text("Disconnected");
+      console.log("Disconnected");
+
+    });
+
+    socket.on('sendMessage', function(msg) {
+      socket.emit('client_msg',$("#message").val());
+      console.log("just sent: ", $("#message").val());
+    });
+
+    sendMessage = function() {
+      socket.emit('client_msg',$("#message").val());
+      console.log("just sent: ", $("#message").val());
+    };
+
+    $("#message").keydown(function(event){
+      if(event.keyCode == 13){ // if enter
+        sendMessage();
+    }
+});
+    
+
+  });
+
+</script>
+    
+
+
+</body>
+</html>
