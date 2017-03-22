@@ -1,0 +1,29 @@
+{
+  "name": "wayback-chat",
+  "version": "1.0.0",
+  "description": "IRC style chat server / client application using node/express/ws",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arkadi81/wayback-chat.git"
+  },
+  "keywords": [
+    "chat",
+    "IRC",
+    "webSocket",
+    "ws"
+  ],
+  "author": "arkadi81",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arkadi81/wayback-chat/issues"
+  },
+  "homepage": "https://github.com/arkadi81/wayback-chat#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "ws": "^2.2.2"
+  }
+}

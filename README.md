@@ -8,3 +8,13 @@ Features:
 * logging (non persistent at first)
 * allowing clients to save the log file
 * time stamps based on the client time zone
+
+## Usage:
+
+* clone
+* npm install
+* note - using native socket support, new chrome browsers only
+* node ws.js
+* navigate to html, no need to server
+
+
